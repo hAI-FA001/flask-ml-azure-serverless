@@ -1,31 +1,15 @@
-## 🎓 Pragmatic AI Labs | Join 1M+ ML Engineers
-
-### 🔥 Hot Course Offers:
-* 🤖 [Master GenAI Engineering](https://ds500.paiml.com/learn/course/0bbb5/) - Build Production AI Systems
-* 🦀 [Learn Professional Rust](https://ds500.paiml.com/learn/course/g6u1k/) - Industry-Grade Development
-* 📊 [AWS AI & Analytics](https://ds500.paiml.com/learn/course/31si1/) - Scale Your ML in Cloud
-* ⚡ [Production GenAI on AWS](https://ds500.paiml.com/learn/course/ehks1/) - Deploy at Enterprise Scale
-* 🛠️ [Rust DevOps Mastery](https://ds500.paiml.com/learn/course/ex8eu/) - Automate Everything
-
-### 🚀 Level Up Your Career:
-* 💼 [Production ML Program](https://paiml.com) - Complete MLOps & Cloud Mastery
-* 🎯 [Start Learning Now](https://ds500.paiml.com) - Fast-Track Your ML Career
-* 🏢 Trusted by Fortune 500 Teams
-
-Learn end-to-end ML engineering from industry veterans at [PAIML.COM](https://paiml.com)
-
 # flask-ml-azure-serverless
+
 Deploy Flask Machine Learning Application on Azure App Services
 
 ![continuous-delivery](https://user-images.githubusercontent.com/58792/85061538-f7352780-b174-11ea-8001-b0561c5bad73.jpg)
 
 ## If you run into problems
 
-* Build the container using Docker commands in the `Makefile`
-* Rebuild the model using a later version of sklearn and update requirements.txt with your version of sklearn
+- Build the container using Docker commands in the `Makefile`
+- Rebuild the model using a later version of sklearn and update requirements.txt with your version of sklearn
 
-
-## To run it locally follow these steps (on Python 3.8, there are issues on later version of Python)
+## To run it locally follow these steps (Works on Python 3.12.10)
 
 1.  Create virtual environment and source
 
@@ -44,7 +28,7 @@ source ~/.flask-ml-azure/bin/activate
 
 1.  Refer to [Azure Official Documentation guide here throughout](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops)
 
-2. Launch Azure Shell  
+2.  Launch Azure Shell
 
 ![1-launch-azure-shell](https://user-images.githubusercontent.com/58792/89555246-cc169e00-d7dd-11ea-8164-88caa1b8beba.png)
 
@@ -54,7 +38,7 @@ source ~/.flask-ml-azure/bin/activate
 
 4. Clone the repo into Azure Cloud Shell
 
-*Note:  You make need to follow this YouTube video guide on how to [setup SSH keys and configure cloudshell environment](https://www.youtube.com/watch?v=3vtBAfPjQus)*
+_Note: You make need to follow this YouTube video guide on how to [setup SSH keys and configure cloudshell environment](https://www.youtube.com/watch?v=3vtBAfPjQus)_
 
 5.  Create virtual environment and source
 
@@ -102,8 +86,7 @@ Change the line in `make_predict_azure_app.sh` to match the deployed prediction
 
 ![10-github-integration](https://user-images.githubusercontent.com/58792/89560627-5282ae00-d7e5-11ea-8b0b-bdecfff0e4d3.png)
 
-
-This process will create a YAML file that looks roughly like the YAML output shown below.  Refer to the [official Azure Pipeline YAML documentation for more information about it](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops#yaml-pipeline-explained).
+This process will create a YAML file that looks roughly like the YAML output shown below. Refer to the [official Azure Pipeline YAML documentation for more information about it](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops#yaml-pipeline-explained).
 
 ```
 # Python to Linux Web App on Azure
@@ -117,7 +100,7 @@ trigger:
 variables:
   # Azure Resource Manager connection created during pipeline creation
   azureServiceConnectionId: '<youridhere>'
-  
+
   # Web app name
   webAppName: 'flask-ml-service'
 
@@ -129,7 +112,7 @@ variables:
 
   # Project root folder. Point to the folder containing manage.py file.
   projectRoot: $(System.DefaultWorkingDirectory)
-  
+
   # Python version: 3.7
   pythonVersion: '3.7'
 
@@ -145,7 +128,7 @@ stages:
       inputs:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
-    
+
     - script: |
         python -m venv antenv
         source antenv/bin/activate
@@ -181,7 +164,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          
+
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '$(pythonVersion)'
@@ -193,12 +176,13 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-  ```
-10.  Verify Continuous Delivery of Azure Pipelines by changing `app.py`
+```
+
+10. Verify Continuous Delivery of Azure Pipelines by changing `app.py`
 
 You can watch this [YouTube Walkthrough of this process](https://www.youtube.com/watch?v=3KF9DltYvZU)
 
-11.  Add a lint step (this gates your code against syntax failure)
+11. Add a lint step (this gates your code against syntax failure)
 
 ```
     - script: |
@@ -212,14 +196,8 @@ You can watch this [YouTube Walkthrough of this process](https://www.youtube.com
 
 You can watch this [YouTube Walkthrough of this process](https://www.youtube.com/watch?v=TItOatTfAOc)
 
-
 ### [Cloud Computing for Data Analysis Book](https://leanpub.com/cloud4data)
+
 This book is being written "just in time", with a weekly release schedule.
 
 ![cloud4data books](https://d2sofvawe08yqg.cloudfront.net/cloud4data/hero2x?1578933644)
-
-
-
-
-
-
